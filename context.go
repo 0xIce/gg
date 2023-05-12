@@ -51,7 +51,7 @@ const (
 type WordWrapType int
 
 const (
-	WordWrapTypeSpace WordWrap = iota
+	WordWrapTypeSpace WordWrapType = iota
 	WordWrapTypeRune
 )
 
@@ -839,7 +839,7 @@ func (dc *Context) MeasureString(s string) (w, h float64) {
 // WordWrap wraps the specified string to the given max width and current
 // font face.
 func (dc *Context) WordWrap(s string, w float64) []string {
-	return wordWrap(dc, s, w)
+	return wordWrap(dc, s, w, dc.wordWrapType)
 }
 
 // Transformation Matrix Operations
