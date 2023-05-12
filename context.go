@@ -48,6 +48,13 @@ const (
 	AlignRight
 )
 
+type WordWrap int
+
+const (
+	WordWrapSpace WordWrap = iota
+	WordWrapRune
+)
+
 var (
 	defaultFillStyle   = NewSolidPattern(color.White)
 	defaultStrokeStyle = NewSolidPattern(color.Black)
@@ -77,6 +84,7 @@ type Context struct {
 	fontHeight    float64
 	matrix        Matrix
 	stack         []*Context
+	wordWrap      WordWrap
 }
 
 // NewContext creates a new image.RGBA with the specified width and height
@@ -110,6 +118,10 @@ func NewContextForRGBA(im *image.RGBA) *Context {
 		fontHeight:    13,
 		matrix:        Identity(),
 	}
+}
+
+func (dc *Context) SetWordWrap(wordWrap WordWrap) {
+	dc.wordWrap = wordWrap
 }
 
 // GetCurrentPoint will return the current point and if there is a current point.
