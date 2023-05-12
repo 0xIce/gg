@@ -48,11 +48,11 @@ const (
 	AlignRight
 )
 
-type WordWrap int
+type WordWrapType int
 
 const (
-	WordWrapSpace WordWrap = iota
-	WordWrapRune
+	WordWrapTypeSpace WordWrap = iota
+	WordWrapTypeRune
 )
 
 var (
@@ -61,30 +61,30 @@ var (
 )
 
 type Context struct {
-	width         int
-	height        int
-	rasterizer    *raster.Rasterizer
-	im            *image.RGBA
-	mask          *image.Alpha
-	color         color.Color
-	fillPattern   Pattern
-	strokePattern Pattern
-	strokePath    raster.Path
-	fillPath      raster.Path
-	start         Point
-	current       Point
-	hasCurrent    bool
-	dashes        []float64
-	dashOffset    float64
-	lineWidth     float64
-	lineCap       LineCap
-	lineJoin      LineJoin
-	fillRule      FillRule
-	fontFace      font.Face
-	fontHeight    float64
-	matrix        Matrix
-	stack         []*Context
-	wordWrap      WordWrap
+	width         	int
+	height        	int
+	rasterizer    	*raster.Rasterizer
+	im            	*image.RGBA
+	mask          	*image.Alpha
+	color         	color.Color
+	fillPattern   	Pattern
+	strokePattern 	Pattern
+	strokePath    	raster.Path
+	fillPath      	raster.Path
+	start         	Point
+	current       	Point
+	hasCurrent    	bool
+	dashes        	[]float64
+	dashOffset    	float64
+	lineWidth     	float64
+	lineCap       	LineCap
+	lineJoin      	LineJoin
+	fillRule      	FillRule
+	fontFace      	font.Face
+	fontHeight    	float64
+	matrix        	Matrix
+	stack         	[]*Context
+	wordWrapType    WordWrapType
 }
 
 // NewContext creates a new image.RGBA with the specified width and height
@@ -120,8 +120,8 @@ func NewContextForRGBA(im *image.RGBA) *Context {
 	}
 }
 
-func (dc *Context) SetWordWrap(wordWrap WordWrap) {
-	dc.wordWrap = wordWrap
+func (dc *Context) SetWordWrap(wordWrapType WordWrapType) {
+	dc.wordWrapType = wordWrapType
 }
 
 // GetCurrentPoint will return the current point and if there is a current point.
